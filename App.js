@@ -5,6 +5,7 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
 } from "react-native-reanimated";
+import "react-native-gesture-handler";
 
 const SIZE = 100.0;
 
