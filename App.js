@@ -5,6 +5,8 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
+  withSpring,
+  withRepeat,
 } from "react-native-reanimated";
 import "react-native-gesture-handler";
 
@@ -12,18 +14,19 @@ const SIZE = 100.0;
 
 export default function App() {
   const progress = useSharedValue(1);
-  const scale = useSharedValue(1);
+  const scale = useSharedValue(2);
 
   const reanimatedStyle = useAnimatedStyle(() => {
     return {
       opacity: progress.value,
+      borderRadius: (progress.value * SIZE) / 2,
       transform: [{ scale: scale.value }],
     };
   });
 
   useEffect(() => {
-    progress.value = withTiming(0.5);
-    scale.value = withTiming(2);
+    progress.value = withSpring(0.5);
+    scale.value = withRepeat(withSpring(1), 3, true); ///3 times repeat, true means revers like 1-2 then 2-1 then 1-2 scaling
   }, []);
 
   return (
