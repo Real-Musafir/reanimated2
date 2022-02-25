@@ -20,7 +20,10 @@ export default function App() {
     return {
       opacity: progress.value,
       borderRadius: (progress.value * SIZE) / 2,
-      transform: [{ scale: scale.value }],
+      transform: [
+        { scale: scale.value },
+        { rotate: `${progress.value * 2 * Math.PI}rad` },
+      ],
     };
   });
 
