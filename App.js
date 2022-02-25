@@ -12,15 +12,18 @@ const SIZE = 100.0;
 
 export default function App() {
   const progress = useSharedValue(1);
+  const scale = useSharedValue(1);
 
   const reanimatedStyle = useAnimatedStyle(() => {
     return {
       opacity: progress.value,
+      transform: [{ scale: scale.value }],
     };
   });
 
   useEffect(() => {
-    progress.value = withTiming(0, { duration: 5000 });
+    progress.value = withTiming(0.5);
+    scale.value = withTiming(2);
   }, []);
 
   return (
