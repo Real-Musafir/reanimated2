@@ -28,8 +28,8 @@ export default function App() {
   });
 
   useEffect(() => {
-    progress.value = withRepeat(withSpring(0.5), 3, true);
-    scale.value = withRepeat(withSpring(1), 3, true); ///3 times repeat, true means revers like 1-2 then 2-1 then 1-2 scaling
+    progress.value = withRepeat(withSpring(0.5), -1, true);
+    scale.value = withRepeat(withSpring(1), -1, true); /// -1 for repeating infiity animation
   }, []);
 
   return (
