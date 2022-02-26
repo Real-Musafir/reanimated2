@@ -1,16 +1,17 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
-  withTiming,
   withSpring,
   withRepeat,
 } from "react-native-reanimated";
-import "react-native-gesture-handler";
 
 const SIZE = 100.0;
+const handleRotation = (progress) => {
+  "worklet";
+  return `${progress.value * 2 * Math.PI}rad`;
+};
 
 export default function App() {
   const progress = useSharedValue(1);
@@ -20,16 +21,13 @@ export default function App() {
     return {
       opacity: progress.value,
       borderRadius: (progress.value * SIZE) / 2,
-      transform: [
-        { scale: scale.value },
-        { rotate: `${progress.value * 2 * Math.PI}rad` },
-      ],
+      transform: [{ scale: scale.value }, { rotate: handleRotation(progress) }],
     };
-  });
+  }, []);
 
   useEffect(() => {
-    progress.value = withRepeat(withSpring(0.5), -1, true);
-    scale.value = withRepeat(withSpring(1), -1, true); /// -1 for repeating infiity animation
+    progress.value = withRepeat(withSpring(0.5), 3, true);
+    scale.value = withRepeat(withSpring(1), 3, true);
   }, []);
 
   return (
@@ -47,7 +45,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
   },
